@@ -19,16 +19,28 @@
 - react-tree-fiber
 - module scss
 
-### Развертывание и Запуск
+### Развертывание для проверки работоспособности
 - в системе должны присутствовать Python3.8 и Node.js
 - git clone https://github.com/kai-nn/test_projekt_5.git
 - cd test_projekt_5
-- backend:
-  - ставим виртуальное окружение Python: python3 -m virtualenv -p python3 venv
-  - ставим зависимости: sudo python3 -m pip install -r requirements.txt 
+- backend (порядок для Linux Ubuntu):
+  - ставим виртуальное окружение для Python (если не установлено): sudo apt install -y python3-venv
+  - ставим виртуальное окружение для приложения: sudo python3 -m venv venv
+  - изменяем права на venv: sudo chmod -R a+rwx venv
   - активируем окружение: source venv/bin/activate
-  - запускаем сервер: flask run
-- front:
+  - ставим зависимости: pip install -r requirements.txt 
+  - запускаем сервер отладки: flask run
+- front (в терминале на клиентской машине):
   - cd front
   - ставим зависимости: npm i
   - запускаем сервер: npm run start
+
+### Развернутая версия на сервере (временно, для демонстрации)
+www.test.promdev.ru
+
+Дополнительно к вышеуказанному применялись:
+- сервер: HP microserver G8
+- система виртуализации: Proxmox
+- регистрация домена: Timeweb.com
+- проксирование: Nginx
+- производственный сервер приложений: Gunicorn
