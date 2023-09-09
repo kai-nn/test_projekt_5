@@ -4,29 +4,35 @@ import cls from './Menu.module.scss'
 const Menu = (props) => {
 
     const {coneProperty, setConeProperty} = props
-    const [radius, setRadius] = useState(2)
-    const [height, setHeight] = useState(4)
-    const [segment, setSegment] = useState(4)
+
+    const [radius, setRadius] = useState(coneProperty.r)
+    const [height, setHeight] = useState(coneProperty.h)
+    const [segment, setSegment] = useState(coneProperty.N)
+    const [timerLink, setTimerLink] = useState(null)
 
     // старт пересчета модели после изменения параметров
     useEffect(() => {
-        setTimeout(() => {
-           setConeProperty(
-                {
-                    h: +height,
-                    r: +radius,
-                    N: +segment
-                }
-            )
-        }, 1000)
-
+        clearTimeout(timerLink)
+        setTimerLink(
+            setTimeout(() => {
+                setConeProperty(
+                    {
+                        h: height,
+                        r: radius,
+                        N: segment
+                    }
+                )
+            }, 1000)
+        )
     }, [radius, height, segment])
 
+
     const handler = (e) => {
-        if(e.target.name === 'radius') setRadius(e.target.value)
-        if(e.target.name === 'height') setHeight(e.target.value)
-        if(e.target.name === 'segment') setSegment(e.target.value)
+        if(e.target.name === 'radius') setRadius(+e.target.value)
+        if(e.target.name === 'height') setHeight(+e.target.value)
+        if(e.target.name === 'segment') setSegment(+e.target.value)
     }
+
 
     return (
         <div className={cls.Menu}>

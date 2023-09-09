@@ -17,7 +17,7 @@ function App() {
 
     const [attribute, setAttribute] = useState(null)
 
-    const {data, isLoading, statusText, setRequestData} = useRequest()
+    const {data, setRequestData} = useRequest()
 
     useEffect(() => {
         // console.log('coneProperty', coneProperty)
@@ -44,7 +44,7 @@ function App() {
                 setConeProperty={setConeProperty}
             />
 
-            <Cone attribute={attribute} isLoading={isLoading}/>
+            <Cone attribute={attribute} />
         </div>
     )
 }

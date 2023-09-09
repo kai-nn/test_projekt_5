@@ -13,7 +13,7 @@ def index():
 @app.route('/calculation', methods=['POST'])
 def calculation():
     value = request.get_json()
-    # print('value: ', value)
+    print('value: ', value)
 
     h = value['h']
     r = value['r']
