@@ -1,83 +1,46 @@
-import React, { memo,  } from "react";
-import { DoubleSide } from "three";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import React, { memo, useMemo } from "react"
+import * as THREE from "three"
+
+
+const getGeometry = (vertices, normals, smoothPres) => {
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute(
+        'position',
+        new THREE.BufferAttribute(new Float32Array(vertices), 3)
+    )
+    smoothPres
+        ? geometry.setAttribute(
+            'normal',
+            new THREE.BufferAttribute(new Float32Array(normals), 3)
+        )
+        : geometry.computeVertexNormals()
+    return geometry
+}
 
 
 const Cone = ( props ) => {
-    const { attribute } = props
-    if(attribute === null) return
+    const { attribute, smoothPres } = props
+    const geo = useMemo(
+        () => getGeometry(attribute.vertices, attribute.normals, smoothPres),
+        [attribute, smoothPres]
+    );
 
-    let vertexes = new Float32Array(attribute.vertices)
-    let indices = new Uint16Array(attribute.indices)
-    let normals = new Float32Array(attribute.normals)
+    const mat = useMemo(
+        () => new THREE.MeshStandardMaterial({
+            side: THREE.DoubleSide,
+            color: new THREE.Color("rgb(135, 206, 235)")
+        }),
+        []
+    )
 
-    const colors = new Float32Array([1, 2, 3])
-
-    // indices = new Uint16Array([
-    //     0, 1, 2,
-    //     0, 2, 3,
-    //     0, 3, 4,
-    //     0, 4, 5,
-    //     0, 5, 6,
-    //     0, 6, 7,
-    //     0, 7, 8,
-    //     0, 8, 9,
-    //     0, 9, 10,
-    //     0, 10, 11,
-    //     0, 11, 12,
-    //     0, 12, 13,
-    //     0, 13, 14,
-    //     0, 14, 15,
-    //     0, 15, 16,
-    // ])
-
-  return (
-
-      <Canvas camera={{ fov: 90, position: [0, 0, 3] }}>
-            <OrbitControls  />
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[1, 1, 1]} intensity={0.8} />
-
-            <mesh>
-                <bufferGeometry>
-                    <bufferAttribute
-                        attach='attributes-position'
-                        array={vertexes}
-                        count={vertexes.length / 3}
-                        itemSize={3}
-                    />
-
-                    <bufferAttribute
-                        attach='attributes-color'
-                        array={colors}
-                        count={colors.length / 3}
-                        itemSize={3}
-                    />
-
-                    <bufferAttribute
-                        attach='attributes-normal'
-                        array={normals}
-                        count={normals.length / 3}
-                        itemSize={3}
-                    />
-
-                    <bufferAttribute
-                        attach="index"
-                        array={indices}
-                        count={indices.length}
-                        itemSize={1}
-                    />
-                </bufferGeometry>
-
-                <meshStandardMaterial
-                    vertexColors
-                    side={DoubleSide}
-                />
-            </mesh>
-    </Canvas>
-
-  )
+    return (
+        <mesh
+            position={[-2, 0, 0]}
+            rotation={[-0.5, 0, 0]}
+            geometry={geo}
+            material={mat}
+        />
+    )
 }
 
 

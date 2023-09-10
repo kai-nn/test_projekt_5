@@ -19,11 +19,10 @@ def calculation():
     r = value['r']
     N = value['N']
 
-    vertices, indices, normals = createTriangulation(h, r, N)
+    vertices, normals = calcGeometry(h, r, N)
 
     output = {
         'vertices': vertices,
-        'indices': indices,
         'normals': normals,
     }
     return jsonify(output)
