@@ -19,10 +19,10 @@ def calculation():
     r = value['r']
     N = value['N']
 
-    vertexes, indices, normals = createTriangulation(h, r, N)
+    vertices, indices, normals = createTriangulation(h, r, N)
 
     output = {
-        'vertexes': vertexes,
+        'vertices': vertices,
         'indices': indices,
         'normals': normals,
     }

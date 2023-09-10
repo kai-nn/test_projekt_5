@@ -1,13 +1,13 @@
 import math
 
-pi = 3.14
+pi = 3.1415926535
 
 
 def createTriangulation(h, r, N):
     """ Триангуляция точек """
 
     # вычисление вершин треугольников
-    vertexes = []
+    vertices = []
     for i in list(range(N)):
         A = (0, 0, h)
         P = (
@@ -21,7 +21,7 @@ def createTriangulation(h, r, N):
             0
         )
 
-        vertexes += [*A, *P, *Pn]
+        vertices += [*A, *P, *Pn]
 
     # индексы вершин
     indices = []
@@ -35,5 +35,5 @@ def createTriangulation(h, r, N):
     for i in list(range(N * 3)):
         normals += [(0, 0, 1)]
 
-    return vertexes, indices, normals
+    return vertices, indices, normals
 

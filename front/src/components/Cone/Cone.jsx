@@ -1,13 +1,14 @@
-import React from "react";
+import React, { memo,  } from "react";
 import { DoubleSide } from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 
-const Cone = ( { attribute } ) => {
+const Cone = ( props ) => {
+    const { attribute } = props
     if(attribute === null) return
 
-    let vertexes = new Float32Array(attribute.vertexes)
+    let vertexes = new Float32Array(attribute.vertices)
     let indices = new Uint16Array(attribute.indices)
     let normals = new Float32Array(attribute.normals)
 
@@ -76,7 +77,8 @@ const Cone = ( { attribute } ) => {
             </mesh>
     </Canvas>
 
-  );
-};
+  )
+}
 
-export default Cone;
+
+export default memo(Cone)

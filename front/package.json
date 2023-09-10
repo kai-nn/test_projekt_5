@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^9.81.0",
+    "@react-three/drei": "9.73.0",
     "@react-three/fiber": "^8.14.0",
     "leva": "^0.9.35",
     "react": "^18.2.0",
@@ -38,8 +38,5 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "devDependencies": {
-    "eslint": "8.22.0",
-    "eslint-plugin-react": "^7.33.2"
-  }
+  "devDependencies": {}
 }

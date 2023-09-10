@@ -8,7 +8,7 @@ const Menu = (props) => {
     const [radius, setRadius] = useState(coneProperty.r)
     const [height, setHeight] = useState(coneProperty.h)
     const [segment, setSegment] = useState(coneProperty.N)
-    const [timerLink, setTimerLink] = useState(null)
+    const [timerLink, setTimerLink] = useState(0)
 
     // старт пересчета модели после изменения параметров
     useEffect(() => {
